@@ -1,0 +1,15 @@
+# โมเดลมักใหญ่เกิน GitHub (100 MB ต่อไฟล์)
+burnout_model.pkl
+*.pkl
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# เครื่องมือ
+.idea/
+.vscode/
+.DS_Store
