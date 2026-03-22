@@ -113,8 +113,19 @@ div[data-baseweb="select"] > div {
   background-color: #27272a !important;
   border: 2px solid #ffffff !important;
 }
+/* st.radio — ป้ายตัวเลือก (แนวตั้ง/แนวนอน) ให้เป็นสีดำทั้งหมด */
+[data-testid="stRadio"] label,
+[data-testid="stRadio"] label p,
+[data-testid="stRadio"] label span,
+[data-testid="stRadio"] p,
+[data-testid="stRadio"] span,
+[data-testid="stRadio"] [data-baseweb="radio"] ~ div {
+  color: #000000 !important;
+}
+[data-testid="stRadio"] {
+  color: #000000 !important;
+}
 [data-testid="stRadio"] label {
-  color: #3f3f46 !important;
   font-size: 0.9rem !important;
 }
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
@@ -145,6 +156,25 @@ hr {
   color: #000000 !important;
 }
 [data-testid="stMetric"] {
+  color: #000000 !important;
+}
+/* st.tabs — ข้อความแท็บทุกแท็บ (เลือก/ไม่เลือก) เป็นสีดำ */
+[data-testid="stTabs"] [data-baseweb="tab"],
+[data-testid="stTabs"] [data-baseweb="tab"] p,
+[data-testid="stTabs"] [data-baseweb="tab"] span,
+[data-testid="stTabs"] button[role="tab"],
+[data-testid="stTabs"] [role="tab"] {
+  color: #000000 !important;
+}
+[data-testid="stTabs"] [aria-selected="true"] {
+  color: #000000 !important;
+  border-bottom-color: #000000 !important;
+}
+[data-testid="stTabs"] [aria-selected="false"] {
+  color: #000000 !important;
+}
+.stTabs [data-baseweb="tab"],
+.stTabs [data-baseweb="tab"] * {
   color: #000000 !important;
 }
 </style>
