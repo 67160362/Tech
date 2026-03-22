@@ -133,6 +133,20 @@ div[data-baseweb="select"] > div {
 hr {
   border-color: #e4e4e7 !important;
 }
+/* ตัวเลขสรุปใต้กราฟความน่าจะเป็น (st.metric) — ให้ตัวอักษรอ่านชัดบนพื้นสว่าง */
+[data-testid="stMetricLabel"] p,
+[data-testid="stMetricLabel"] label {
+  color: #000000 !important;
+}
+[data-testid="stMetricValue"] {
+  color: #000000 !important;
+}
+[data-testid="stMetricDelta"] {
+  color: #000000 !important;
+}
+[data-testid="stMetric"] {
+  color: #000000 !important;
+}
 </style>
         """,
         unsafe_allow_html=True,
@@ -229,13 +243,29 @@ def probability_figure(class_labels: np.ndarray, probabilities: np.ndarray) -> g
             marker_color=colors,
             text=[f"{p * 100:.1f}%" for p in probs],
             textposition="outside",
+            textfont=dict(color="#000000", size=13),
             cliponaxis=False,
             hovertemplate="<b>%{y}</b><br>ความน่าจะเป็น: %{x:.1%}<extra></extra>",
         )
     )
+    axis_font = dict(color="#000000")
     fig.update_layout(
-        xaxis=dict(tickformat=".0%", title="ความน่าจะเป็น", range=[0, 1]),
-        yaxis=dict(title="", categoryorder="array", categoryarray=display_order),
+        font=dict(color="#000000"),
+        xaxis=dict(
+            tickformat=".0%",
+            title=dict(text="ความน่าจะเป็น", font=dict(color="#000000")),
+            range=[0, 1],
+            tickfont=axis_font,
+            linecolor="#52525b",
+            gridcolor="#e4e4e7",
+        ),
+        yaxis=dict(
+            title="",
+            categoryorder="array",
+            categoryarray=display_order,
+            tickfont=axis_font,
+            linecolor="#52525b",
+        ),
         height=300,
         margin=dict(l=8, r=48, t=8, b=8),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -537,7 +567,7 @@ if st.session_state.get("analysis_done"):
     sorted_p = np.sort(probabilities)[::-1]
     margin = float(sorted_p[0] - sorted_p[1]) if len(sorted_p) > 1 else 1.0
     st.markdown(
-        f"<p style='font-size:0.9rem;color:#52525b;margin-top:0.5rem;'>"
+        f"<p style='font-size:0.9rem;color:#000000;margin-top:0.5rem;'>"
         f"ความมั่นใจเชิงสัมพัทธ์: ระยะห่างระหว่างความน่าจะเป็นอันดับ 1 กับ 2 ≈ "
         f"<strong>{margin * 100:.1f}%</strong> — ถ้าค่าน้อย แปลว่าสองคลาสแรกใกล้เคียงกัน "
         f"ควรตีความด้วยความระมัดระวัง</p>",
@@ -597,15 +627,28 @@ if st.session_state.get("analysis_done"):
                         color_discrete_sequence=["#27272a"],
                     )
                     fig_imp.update_layout(
+                        font=dict(color="#000000"),
                         height=max(380, len(imp_df) * 30),
-                        yaxis={"categoryorder": "total ascending"},
+                        yaxis={
+                            "categoryorder": "total ascending",
+                            "tickfont": dict(color="#000000"),
+                            "title": dict(font=dict(color="#000000")),
+                            "linecolor": "#52525b",
+                        },
+                        xaxis={
+                            "tickfont": dict(color="#000000"),
+                            "title": dict(font=dict(color="#000000")),
+                            "linecolor": "#52525b",
+                            "gridcolor": "#e4e4e7",
+                        },
                         margin=dict(l=8, r=8, t=8, b=8),
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="#fafafa",
                         showlegend=False,
                     )
                     fig_imp.update_traces(
-                        hovertemplate="<b>%{y}</b><br>ความสำคัญ: %{x:.4f}<extra></extra>"
+                        hovertemplate="<b>%{y}</b><br>ความสำคัญ: %{x:.4f}<extra></extra>",
+                        textfont=dict(color="#000000"),
                     )
                     st.plotly_chart(fig_imp, use_container_width=True)
                     with st.expander("อธิบายสั้นๆ"):
