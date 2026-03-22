@@ -1,6 +1,6 @@
-# โมเดลมักใหญ่เกิน GitHub (100 MB ต่อไฟล์)
-burnout_model.pkl
+# ไฟล์ .pkl อื่นๆ ไม่ขึ้น repo — ยกเว้น burnout_model.pkl (ต้องไม่เกิน ~100 MB ต่อไฟล์บน GitHub)
 *.pkl
+!burnout_model.pkl
 
 # Python
 .venv/
